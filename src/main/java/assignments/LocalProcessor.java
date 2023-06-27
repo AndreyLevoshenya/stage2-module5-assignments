@@ -38,10 +38,14 @@ public class LocalProcessor {
 
     @ListIteratorAnnotation
     public void listIterator(List<String> stringList) {
-        for (String s : stringList) {
-            if(s != null) {
-                System.out.println(s.hashCode());
+        try {
+            for (String s : stringList) {
+                if(s != null) {
+                    System.out.println(s.hashCode());
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -61,15 +65,16 @@ public class LocalProcessor {
     public void readFullProcessorName(File file) {
         try {
             informationScanner = new Scanner(file);
-            builder = new StringBuilder(processorVersion);
+            builder = new StringBuilder(processorName);
             while (informationScanner.hasNext()) {
                 builder.append(informationScanner.nextLine());
             }
-            processorVersion = builder.toString();
         } catch (FileNotFoundException e) {
-            System.err.println("file not found");
+            e.printStackTrace();
         } finally {
             informationScanner.close();
         }
+
+        processorName = builder.toString();
     }
 }
