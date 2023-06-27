@@ -30,7 +30,7 @@ public class LocalProcessor {
         this.processorVersion = processorVersion;
         this.valueOfCheap = valueOfCheap;
         this.informationScanner = informationScanner;
-        LocalProcessor.stringLinkedList = new LinkedList<>(stringArrayList);
+        stringLinkedList = new LinkedList<>(stringArrayList);
     }
 
     public LocalProcessor() {
@@ -58,12 +58,18 @@ public class LocalProcessor {
     }
 
     @ReadFullProcessorNameAnnotation
-    public void readFullProcessorName(File file) throws FileNotFoundException {
+    public void readFullProcessorName(File file) {
+        try {
             informationScanner = new Scanner(file);
             builder = new StringBuilder(processorVersion);
             while (informationScanner.hasNext()) {
                 builder.append(informationScanner.nextLine());
             }
             processorVersion = builder.toString();
+        } catch (FileNotFoundException e) {
+            System.err.println("file not found");
+        } finally {
+            informationScanner.close();
+        }
     }
 }
