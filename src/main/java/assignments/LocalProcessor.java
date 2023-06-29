@@ -2,7 +2,7 @@ package assignments;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,7 +20,7 @@ public class LocalProcessor {
     private String processorVersion;
     private int valueOfCheap;
     private Scanner informationScanner;
-    private static List<String> stringLinkedList = new LinkedList<>();
+    private static List<String> stringArrayList = new ArrayList<>();
     private StringBuilder builder;
 
     public LocalProcessor(String processorName, long period, String processorVersion, int valueOfCheap,
@@ -30,7 +30,7 @@ public class LocalProcessor {
         this.processorVersion = processorVersion;
         this.valueOfCheap = valueOfCheap;
         this.informationScanner = informationScanner;
-        stringLinkedList = new LinkedList<>(stringArrayList);
+        LocalProcessor.stringArrayList = new ArrayList<>(stringArrayList);
     }
 
     public LocalProcessor() {
@@ -39,7 +39,8 @@ public class LocalProcessor {
     @ListIteratorAnnotation
     public void listIterator(List<String> stringList) {
         try {
-            for (String s : stringList) {
+            stringArrayList = new ArrayList<>(stringList);
+            for (String s : stringArrayList) {
                     System.out.println(s.hashCode());
             }
         } catch (Exception e) {
