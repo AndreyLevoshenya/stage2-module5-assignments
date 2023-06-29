@@ -40,9 +40,7 @@ public class LocalProcessor {
     public void listIterator(List<String> stringList) {
         try {
             for (String s : stringList) {
-                if(s != null) {
                     System.out.println(s.hashCode());
-                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,9 +51,7 @@ public class LocalProcessor {
     public String fullNameProcessorGenerator(List<String> stringList) {
         builder = new StringBuilder(processorName);
         for(String string : stringList) {
-            if(string != null) {
-                builder.append(string).append(" ");
-            }
+            builder.append(string).append(" ");
         }
         processorName = builder.toString();
         return processorName;
@@ -69,12 +65,11 @@ public class LocalProcessor {
             while (informationScanner.hasNext()) {
                 builder.append(informationScanner.nextLine());
             }
+            processorName = builder.toString();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } finally {
             informationScanner.close();
         }
-
-        processorName = builder.toString();
     }
 }
